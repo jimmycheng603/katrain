@@ -109,12 +109,12 @@ class GameNode(SGFNode):
         self.analysis = {"moves": {}, "root": None, "ownership": None, "policy": None, "completed": False}
 
     def sgf_properties(
-        self,
-        save_comments_player=None,
-        save_comments_class=None,
-        eval_thresholds=None,
-        save_analysis=False,
-        save_marks=False,
+            self,
+            save_comments_player=None,
+            save_comments_class=None,
+            eval_thresholds=None,
+            save_analysis=False,
+            save_marks=False,
     ):
         properties = copy.copy(super().sgf_properties())
         note = self.note.strip()
@@ -129,10 +129,10 @@ class GameNode(SGFNode):
             show_class = False
         comments = properties.get("C", [])
         if (
-            self.parent
-            and self.parent.analysis_exists
-            and self.analysis_exists
-            and (note or ((save_comments_player or {}).get(self.player, False) and show_class))
+                self.parent
+                and self.parent.analysis_exists
+                and self.analysis_exists
+                and (note or ((save_comments_player or {}).get(self.player, False) and show_class))
         ):
             if save_marks:
                 candidate_moves = self.parent.candidate_moves
@@ -183,16 +183,16 @@ class GameNode(SGFNode):
 
     # various analysis functions
     def analyze(
-        self,
-        engine,
-        priority=PRIORITY_DEFAULT,
-        visits=None,
-        time_limit=True,
-        refine_move=None,
-        analyze_fast=False,
-        find_alternatives=False,
-        region_of_interest=None,
-        report_every=REPORT_DT,
+            self,
+            engine,
+            priority=PRIORITY_DEFAULT,
+            visits=None,
+            time_limit=True,
+            refine_move=None,
+            analyze_fast=False,
+            find_alternatives=False,
+            region_of_interest=None,
+            report_every=REPORT_DT,
     ):
         engine.request_analysis(
             self,
@@ -227,12 +227,12 @@ class GameNode(SGFNode):
                 cur.update({k: v for k, v in move_analysis.items() if k not in cur})
 
     def set_analysis(
-        self,
-        analysis_json: Dict,
-        refine_move: Optional[Move] = None,
-        additional_moves: bool = False,
-        region_of_interest=None,
-        partial_result: bool = False,
+            self,
+            analysis_json: Dict,
+            refine_move: Optional[Move] = None,
+            additional_moves: bool = False,
+            region_of_interest=None,
+            partial_result: bool = False,
     ):
         if refine_move:
             pvtail = analysis_json["moveInfos"][0]["pv"] if analysis_json["moveInfos"] else []
@@ -296,7 +296,7 @@ class GameNode(SGFNode):
     def format_winrate(self, win_rate=None):
         win_rate = win_rate or self.winrate
         if win_rate is not None:
-            return f"{'B' if win_rate > 0.5 else 'W'} {max(win_rate,1-win_rate):.1%}"
+            return f"{'B' if win_rate > 0.5 else 'W'} {max(win_rate, 1 - win_rate):.1%}"
 
     def move_policy_stats(self) -> Tuple[Optional[int], float, List]:
         single_move = self.move
@@ -340,11 +340,11 @@ class GameNode(SGFNode):
                         top_move = previous_top_move["move"]
                         score = self.format_score(previous_top_move["scoreLead"])
                         text += (
-                            i18n._("Info:top move").format(
-                                top_move=top_move,
-                                score=score,
-                            )
-                            + "\n"
+                                i18n._("Info:top move").format(
+                                    top_move=top_move,
+                                    score=score,
+                                )
+                                + "\n"
                         )
                     else:
                         text += i18n._("Info:best move") + "\n"
@@ -388,11 +388,11 @@ class GameNode(SGFNode):
     def parent_realized_points_lost(self) -> Optional[float]:
         single_move = self.move
         if (
-            single_move
-            and self.parent
-            and self.parent.parent
-            and self.analysis_exists
-            and self.parent.parent.analysis_exists
+                single_move
+                and self.parent
+                and self.parent.parent
+                and self.analysis_exists
+                and self.parent.parent.analysis_exists
         ):
             parent_parent_score = self.parent.parent.score
             score = self.score

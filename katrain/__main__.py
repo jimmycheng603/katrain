@@ -506,6 +506,7 @@ class KaTrainGui(Screen, KaTrainBase):
         if not rewind:
             self.game.redo(999)
 
+    #打开"加载棋谱"
     def _do_analyze_sgf_popup(self):
         if not self.fileselect_popup:
             popup_contents = LoadSGFPopup(self)

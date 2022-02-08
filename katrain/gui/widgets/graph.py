@@ -106,6 +106,13 @@ class ScoreGraph(Graph):
         nodes = self.nodes
         if nodes:
             score_values = [n.score if n and n.score else math.nan for n in nodes]
+            # score_values=[]
+            # for n in nodes:
+            #     if n and n.score:
+            #         score_values.append(n.score)
+            #     else:
+            #         score_values.append(math.nan)
+
             score_nn_values = [n.score for n in nodes if n and n.score]
             score_values_range = min(score_nn_values or [0]), max(score_nn_values or [0])
 

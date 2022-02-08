@@ -26,7 +26,9 @@ from katrain.core.sgf_parser import Move
 from katrain.core.utils import find_package_resource, json_truncate_arrays
 
 
-class BaseEngine:  # some common elements between analysis and contribute engine
+#engine基类
+class BaseEngine:
+    # some common elements between analysis and contribute engine
 
     RULESETS_ABBR = [
         ("jp", "japanese"),
@@ -153,6 +155,8 @@ class KataGoEngine(BaseEngine):
             except (FileNotFoundError, PermissionError, OSError) as e:
                 self.on_error(i18n._("Starting Kata failed").format(command=self.command, error=e), code="c")
                 return  # don't start
+
+            #重点
             self.analysis_thread = threading.Thread(target=self._analysis_read_thread, daemon=True)
             self.stderr_thread = threading.Thread(target=self._read_stderr_thread, daemon=True)
             self.write_stdin_thread = threading.Thread(target=self._write_stdin_thread, daemon=True)
