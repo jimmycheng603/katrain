@@ -105,13 +105,13 @@ class ScoreGraph(Graph):
     def update_graph(self, *args):
         nodes = self.nodes
         if nodes:
-            score_values = [n.score if n and n.score else math.nan for n in nodes]
-            # score_values=[]
-            # for n in nodes:
-            #     if n and n.score:
-            #         score_values.append(n.score)
-            #     else:
-            #         score_values.append(math.nan)
+            #score_values = [n.score if n and n.score else math.nan for n in nodes]
+            score_values=[]
+            for n in nodes:
+                if n and n.score:
+                    score_values.append(n.score)
+                else:
+                    score_values.append(math.nan)
 
             score_nn_values = [n.score for n in nodes if n and n.score]
             score_values_range = min(score_nn_values or [0]), max(score_nn_values or [0])
@@ -130,6 +130,11 @@ class ScoreGraph(Graph):
                 max(math.ceil(max(-winrate_values_range[0], winrate_values_range[1]) / winrate_granularity), 1)
                 * winrate_granularity
             )
+
+            # print("score_scale")
+            # print(self.score_scale)
+            # print("winrate_scale")
+            # print(self.winrate_scale)
 
             xscale = self.width / max(len(score_values) - 1, 15)
             available_height = self.height
@@ -162,6 +167,7 @@ class ScoreGraph(Graph):
                         + available_height / 2 * ((winrate_nn_values or [0])[-1] / self.winrate_scale)
                     )
                 self.winrate_dot_pos = winrate_dot_point
+
 
 
 Builder.load_string(

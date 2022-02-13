@@ -221,9 +221,8 @@ class KaTrainGui(Screen, KaTrainBase):
     def update_state(self, redraw_board=False):  # redirect to message queue thread
         self("update_state", redraw_board=redraw_board)
 
-    def _do_update_state(
-        self, redraw_board=False
-    ):  # is called after every message and on receiving analyses and config changes
+    def _do_update_state(self, redraw_board=False):
+        # is called after every message and on receiving analyses and config changes
         # AI and Trainer/auto-undo handlers
         if not self.game or not self.game.current_node:
             return
@@ -760,6 +759,8 @@ class KaTrainGui(Screen, KaTrainBase):
         elif keycode[1] == "tab":
             self.play_mode.switch_ui_mode()
 
+
+################################################################################################################################
 
 class KaTrainApp(MDApp):
     gui = ObjectProperty(None)
