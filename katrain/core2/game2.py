@@ -82,9 +82,9 @@ class BaseGame:
             ):  # not really according to sgf, and not sure if still needed, last clause for fox
                 self.root.place_handicap_stones(handicap)
         else:
-            board_size = katrain.config("game/size")
-            rules = katrain.config("game/rules")
-            self.komi = katrain.config("game/komi")
+            board_size = '19'
+            rules = 'japanese'
+            self.komi = 6.5
             self.root = GameNode(
                 properties={
                     **Game.DEFAULT_PROPERTIES,
@@ -92,7 +92,7 @@ class BaseGame:
                     **(game_properties or {}),
                 }
             )
-            handicap = katrain.config("game/handicap")
+            handicap = 0
             if handicap:
                 self.root.place_handicap_stones(handicap)
 
@@ -103,11 +103,11 @@ class BaseGame:
         self.main_time_used = 0
 
         # restore shortcuts
-        shortcut_id_to_node = {node.get_property("KTSID", None): node for node in self.root.nodes_in_tree}
-        for node in self.root.nodes_in_tree:
-            shortcut_id = node.get_property("KTSF", None)
-            if shortcut_id and shortcut_id in shortcut_id_to_node:
-                shortcut_id_to_node[shortcut_id].add_shortcut(node)
+        # shortcut_id_to_node = {node.get_property("KTSID", None): node for node in self.root.nodes_in_tree}
+        # for node in self.root.nodes_in_tree:
+        #     shortcut_id = node.get_property("KTSF", None)
+        #     if shortcut_id and shortcut_id in shortcut_id_to_node:
+        #         shortcut_id_to_node[shortcut_id].add_shortcut(node)
 
     # -- move tree functions --
     def _init_state(self):
