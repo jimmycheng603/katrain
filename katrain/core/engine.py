@@ -41,6 +41,8 @@ class BaseEngine:
     ]
     RULESETS = {fromkey: name for abbr, name in RULESETS_ABBR for fromkey in [abbr, name]}
 
+    json_result={}
+
     def __init__(self, katrain, config):
         self.katrain = katrain
         self.config = config
@@ -272,6 +274,14 @@ class KataGoEngine(BaseEngine):
                 continue
             try:
                 analysis = json.loads(line)
+                BaseEngine.json_result[analysis['turnNumber']] = analysis['rootInfo']
+                print(len(BaseEngine.json_result.keys()))
+
+                if len(BaseEngine.json_result.keys()) == 254:
+                    with open('/tmp/1919weiqi/analysis.json', 'w') as f:
+                        json.dump(BaseEngine.json_result, f)
+                    print('.............完成...............')
+
                 if "id" not in analysis:
                     self.katrain.log(f"Error without ID {analysis} received from KataGo", OUTPUT_ERROR)
                     continue

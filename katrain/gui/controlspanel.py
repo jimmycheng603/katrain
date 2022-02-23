@@ -169,14 +169,14 @@ class ControlsPanel(BoxLayout):
             self.stats.points_lost = self.active_comment_node.points_lost
             self.stats.player = self.active_comment_node.player
 
-            print('score:')
-            print(self.stats.score)
-            print('winrate:')
-            print(self.stats.winrate)
-            print('points_lost:')
-            print(self.stats.points_lost)
-            print('player:')
-            print(self.stats.player)
+            # print('score:')
+            # print(self.stats.score)
+            # print('winrate:')
+            # print(self.stats.winrate)
+            # print('points_lost:')
+            # print(self.stats.points_lost)
+            # print('player:')
+            # print(self.stats.player)
 
         else:
             self.stats.score = ""

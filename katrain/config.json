@@ -6,7 +6,7 @@
         "config": "/Users/chengjunjie/Documents/workspace/KataGo/cpp/build/default_j_gtp.cgf",
         "threads": 12,
         "max_visits": 500,
-        "fast_visits": 25,
+        "fast_visits": 5,
         "max_time": 8.0,
         "wide_root_noise": 0.04,
         "_enable_ownership": true
